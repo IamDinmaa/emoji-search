@@ -1,30 +1,42 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import EmojiPicker from "../Emoji/EmojiPicker";
 
-const SearchBar = ({ placeholder }) => {
-  const [filteredData, setFilteredData] = useState("");
+class SearchBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filteredData: "",
+    };
+  }
 
-  return (
-    <div className="search">
-      <div className="searchInput">
-        <input
-          type="text"
-          placeholder={placeholder}
-          onChange={(event) => {
-            setFilteredData(event.target.value);
-          }}
-          value={filteredData}
-        />
-      </div>
+  handleInputChange = (event) => {
+    this.setState({ filteredData: event.target.value });
+  };
 
-      <div>
-        <div className="searchIcon"></div>
+  render() {
+    const { placeholder } = this.props;
+    const { filteredData } = this.state;
+
+    return (
+      <div className="search">
+        <div className="searchInput">
+          <input
+            type="text"
+            placeholder={placeholder}
+            onChange={this.handleInputChange}
+            value={filteredData}
+          />
+        </div>
+
+        <div>
+          <div className="searchIcon"></div>
+        </div>
+        <div className="dataResult">
+          <EmojiPicker Receiver={filteredData} />
+        </div>
       </div>
-      <div className="dataResult">
-        <EmojiPicker Receiver={filteredData} />
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default SearchBar;
