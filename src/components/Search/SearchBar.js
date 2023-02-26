@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import EmojiPicker from "../Emoji/EmojiPicker";
 
-const SearchBar = ({ placeholder, emoji }) => {
+const SearchBar = ({ placeholder }) => {
   const [filteredData, setFilteredData] = useState("");
 
   return (
